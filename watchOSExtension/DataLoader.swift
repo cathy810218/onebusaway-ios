@@ -11,27 +11,15 @@ import CoreLocation
 
 public class DataLoader: ObservableObject {
     @Published var stops: [Stop] = []
-    @Published var fetchError: Bool = false
+    @Published var fetchError: Error?
 
-    private let coreApp: CoreApplication
-
-    init() {
-        let appBundle = Bundle.main
-        let appGroup = appBundle.appGroup
-        assert(appGroup != nil)
-
-        let appConfig = CoreAppConfig(
-            appBundle: appBundle,
-            userDefaults: UserDefaults(suiteName: appGroup)!,
-            bundledRegionsFilePath: appBundle.bundledRegionsFilePath!
-        )
-
-        self.coreApp = CoreApplication(config: appConfig)
-        self.coreApp.regionsService.currentRegion = self.coreApp.regionsService.find(id: 1)
-    }
+    public var coreApp: CoreApplication?
 
     public func fetch() {
-        guard let apiService = coreApp.restAPIService else {
+        guard
+            let coreApp = coreApp,
+            let apiService = coreApp.restAPIService
+        else {
             fatalError()
         }
 
@@ -44,7 +32,7 @@ public class DataLoader: ObservableObject {
 
             switch result {
             case .failure(let error):
-                print("Doh: \(error)")
+                self.fetchError = error
             case .success(let response):
                 self.stops = response.list
             }

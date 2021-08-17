@@ -17,6 +17,7 @@ struct StopRow: View {
 }
 
 struct ContentView: View {
+    @EnvironmentObject var stateBag: StateBag
     @ObservedObject var dataLoader = DataLoader()
 
     var body: some View {
@@ -26,6 +27,7 @@ struct ContentView: View {
                 StopRow(stop: stop)
             }
         }.onAppear {
+            dataLoader.coreApp = stateBag.coreApp
             self.dataLoader.fetch()
         }
     }
