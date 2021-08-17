@@ -11,6 +11,5 @@ targets:
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
         CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
-        CLKComplicationPrincipalClass: "$(PRODUCT_MODULE_NAME).ComplicationController"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.watchkit
