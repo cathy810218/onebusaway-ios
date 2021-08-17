@@ -15,7 +15,7 @@ struct OBAKitApp: App {
     @SceneBuilder var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+                NearbyStopsList()
             }
             .environmentObject(stateBag)
         }

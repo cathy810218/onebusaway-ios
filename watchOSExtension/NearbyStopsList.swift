@@ -16,7 +16,7 @@ struct StopRow: View {
     }
 }
 
-struct ContentView: View {
+struct NearbyStopsList: View {
     @EnvironmentObject var stateBag: StateBag
     @ObservedObject var dataLoader = DataLoader()
 
@@ -35,6 +35,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NearbyStopsList()
     }
 }
