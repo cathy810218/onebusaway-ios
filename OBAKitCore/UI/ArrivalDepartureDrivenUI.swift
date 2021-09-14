@@ -7,6 +7,8 @@
 
 import UIKit
 
+#if !os(watchOS)
+
 /// Tracks arrival/departure times for `ArrivalDeparture`s.
 public typealias ArrivalDepartureTimes = [TripIdentifier: Int]
 
@@ -46,3 +48,5 @@ extension ArrivalDepartureDrivenUI {
         arrivalDepartureTimes[arrivalDeparture.tripID] = arrivalDeparture.arrivalDepartureMinutes
     }
 }
+
+#endif

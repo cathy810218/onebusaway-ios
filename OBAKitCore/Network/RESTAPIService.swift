@@ -265,6 +265,8 @@ public class RESTAPIService: APIService {
         return operation
     }
 
+    #if !os(watchOS)
+
     /// Performs a local search and returns matching results
     ///
     /// - Parameters:
@@ -276,6 +278,10 @@ public class RESTAPIService: APIService {
         enqueueOperation(operation)
         return operation
     }
+
+    #endif
+
+    #if !os(watchOS)
 
     // MARK: - Shapes
 
@@ -293,6 +299,8 @@ public class RESTAPIService: APIService {
         enqueueOperation(operation)
         return operation
     }
+
+    #endif
 
     // MARK: - Agencies
 

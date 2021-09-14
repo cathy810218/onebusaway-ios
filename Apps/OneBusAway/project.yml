@@ -93,6 +93,32 @@ targets:
         DEVELOPMENT_TEAM: 4ZQCMA634J
         PRODUCT_BUNDLE_IDENTIFIER: org.onebusaway.iphone.TodayView
 
+  watchOSApp:
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: org.onebusaway.iphone.watchkitapp
+    info:
+      properties:
+        CFBundleDisplayName: OneBusAway
+        WKCompanionAppBundleIdentifier: org.onebusaway.iphone
+
+  watchOSExtension:
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: org.onebusaway.iphone.watchkitapp.watchkitextension
+    info:
+      properties:
+        CFBundleDisplayName: "OneBusAway"
+        NSExtension:
+          NSExtensionAttributes:
+            WKAppBundleIdentifier: org.onebusaway.iphone.watchkitapp
+        OBAKitConfig:
+          AppGroup: group.org.onebusaway.iphone
+          BundledRegionsFileName: regions.json
+          DeepLinkServerBaseAddress: https://onebusaway.co
+          ExtensionURLScheme: onebusaway
+          RESTServerAPIKey: org.onebusaway.iphone
+          RegionsServerBaseAddress: https://regions.onebusaway.org
+          RegionsServerAPIPath: /regions-v3.json
+
 include:
   - path: Apps/Shared/app_shared.yml
   - path: Apps/Shared/analytics_fx_config.yml
@@ -102,3 +128,5 @@ include:
   - path: OBAKitTests/project.yml
   - path: OBAKitUITests/project.yml
   - path: TodayView/project.yml
+  - path: watchOSApp/project.yml
+  - path: watchOSExtension/project.yml

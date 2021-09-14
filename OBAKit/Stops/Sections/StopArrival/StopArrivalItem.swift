@@ -171,8 +171,8 @@ struct ArrivalDepartureContentConfiguration: OBAContentConfiguration {
         return formatters?.shortFormattedTime(untilMinutes: viewModel.arrivalDepartureMinutes, temporalState: viewModel.temporalState)
     }
 
-    var colorForScheduleStatus: UIColor? {
-        return formatters?.colorForScheduleStatus(viewModel.scheduleStatus)
+    var colorForScheduleStatus: UIColor {
+        return ColorFormatters.uiColorForScheduleStatus(viewModel.scheduleStatus)
     }
 
     var accessibilityTimeLabelText: String? {
@@ -191,8 +191,8 @@ struct ArrivalDepartureContentConfiguration: OBAContentConfiguration {
         }
     }
 
-    var accessibilityScheduleDeviationLabelTextColor: UIColor? {
-        return formatters?.colorForScheduleStatus(viewModel.scheduleStatus)
+    var accessibilityScheduleDeviationLabelTextColor: UIColor {
+        return ColorFormatters.uiColorForScheduleStatus(viewModel.scheduleStatus)
     }
 
     var departureTimeBadgeConfiguration: DepartureTimeBadge.Configuration? {

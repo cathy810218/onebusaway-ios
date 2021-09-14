@@ -9,6 +9,8 @@
 
 import UIKit
 
+#if !os(watchOS)
+
 /// Provides a implementation of the 'empty data set' UI pattern.
 /// To add a button, set `button.config`. See `ActivityIndicatedButton.Configuration` for more details.
 public class EmptyDataSetView: UIView {
@@ -166,8 +168,11 @@ public class EmptyDataSetView: UIView {
     }
 }
 
+#endif
+
 // MARK: - Preview
-#if DEBUG
+
+#if !os(watchOS) && DEBUG
 import SwiftUI
 struct EmptyDataSetView_Previews: PreviewProvider {
     static var previews: some View {

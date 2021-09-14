@@ -41,6 +41,6 @@ class HighlightChangeLabel: UILabel, ArrivalDepartureDrivenUI {
 
     func configure(with arrivalDeparture: ArrivalDeparture, formatters: Formatters) {
         self.text = formatters.shortFormattedTime(until: arrivalDeparture)
-        self.textColor = formatters.colorForScheduleStatus(arrivalDeparture.scheduleStatus)
+        self.textColor = ColorFormatters.uiColorForScheduleStatus(arrivalDeparture.scheduleStatus)
     }
 }

@@ -9,6 +9,8 @@
 
 import UIKit
 
+#if !os(watchOS)
+
 /// A button can be replaced with an activity indicator.
 public class ActivityIndicatedButton: UIView {
     public struct Configuration: Equatable {
@@ -138,3 +140,5 @@ public class ActivityIndicatedButton: UIView {
         showActivityIndicator()
     }
 }
+
+#endif

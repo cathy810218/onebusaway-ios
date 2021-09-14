@@ -4,13 +4,14 @@ targets:
     platform: iOS
     sources: ["."]
     dependencies:
-      - target: OBAKitCore
+      - target: OBAKitCore_iOS
       - sdk: NotificationCenter.framework
     entitlements:
       path: TodayView.entitlements
     info:
       path: Info.plist
       properties:
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
         NSExtension:
           NSExtensionPrincipalClass: TodayView.TodayViewController
           NSExtensionPointIdentifier: com.apple.widget-extension

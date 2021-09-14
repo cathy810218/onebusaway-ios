@@ -143,7 +143,6 @@ public protocol LocationServiceDelegate: NSObjectProtocol {
         locationManager.requestWhenInUseAuthorization()
     }
 
-    @available(iOS 14, *)
     @objc public func requestTemporaryFullAccuracyAuthorization(withPurposeKey purposeKey: String) {
         locationManager.requestTemporaryFullAccuracyAuthorization(withPurposeKey: purposeKey)
     }
@@ -153,7 +152,6 @@ public protocol LocationServiceDelegate: NSObjectProtocol {
         return locationManager.isLocationServicesEnabled && authorizationStatus == .authorizedWhenInUse
     }
 
-    @available(iOS 14, *)
     public var accuracyAuthorization: CLAccuracyAuthorization {
         return locationManager.accuracyAuthorization
     }
@@ -213,7 +211,6 @@ public protocol LocationServiceDelegate: NSObjectProtocol {
         authorizationStatus = status
     }
 
-    @available(iOS 14, *)
     public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
     }

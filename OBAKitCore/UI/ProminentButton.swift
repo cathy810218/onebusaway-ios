@@ -9,6 +9,8 @@
 
 import UIKit
 
+#if !os(watchOS)
+
 /// A button with a background color, designed to give the button more of a tappable affordance.
 public class ProminentButton: UIButton {
 
@@ -60,3 +62,5 @@ public class ProminentButton: UIButton {
         highlightLayer.frame = highlightFrame.insetBy(dx: -ThemeMetrics.buttonContentPadding, dy: -ThemeMetrics.buttonContentPadding)
     }
 }
+
+#endif

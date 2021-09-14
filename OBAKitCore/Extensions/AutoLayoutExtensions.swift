@@ -9,6 +9,8 @@
 
 import UIKit
 
+#if !os(watchOS)
+
 // MARK: - Autolayoutable
 
 extension UIView {
@@ -186,3 +188,5 @@ public protocol Anchorable {
 
 extension UIView: Anchorable {}
 extension UILayoutGuide: Anchorable {}
+
+#endif

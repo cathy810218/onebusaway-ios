@@ -167,7 +167,7 @@ final class TripBookmarkTableCell: OBAListViewCell {
                 accessibilityScheduleDeviationLabel.text = formatters.formattedScheduleDeviation(for: arrivalDeparture)
             }
 
-            accessibilityScheduleDeviationLabel.textColor = formatters.colorForScheduleStatus(arrivalDeparture.scheduleStatus)
+            accessibilityScheduleDeviationLabel.textColor = ColorFormatters.uiColorForScheduleStatus(arrivalDeparture.scheduleStatus)
         }
 
         layoutView()

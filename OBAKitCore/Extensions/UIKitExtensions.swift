@@ -10,6 +10,8 @@
 import UIKit
 import MobileCoreServices
 
+#if !os(watchOS)
+
 // MARK: - Scrollable
 
 public protocol Scrollable where Self: UIViewController {
@@ -533,3 +535,5 @@ public extension UIWindow {
         return top
     }
 }
+
+#endif

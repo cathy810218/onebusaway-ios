@@ -7,7 +7,7 @@
 
 import UIKit
 
-#if DEBUG
+#if DEBUG && !os(watchOS)
 import SwiftUI
 public struct UIViewPreview<View: UIView>: UIViewRepresentable {
     public let view: View

@@ -10,6 +10,8 @@
 import Foundation
 import MapKit
 
+#if !os(watchOS)
+
 public class PolylineEntity: NSObject, Decodable {
     public let points: String
 
@@ -27,3 +29,5 @@ public class PolylineEntity: NSObject, Decodable {
         return p.mkPolyline
     }()
 }
+
+#endif

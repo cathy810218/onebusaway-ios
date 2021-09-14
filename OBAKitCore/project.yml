@@ -1,7 +1,7 @@
 targets:
   OBAKitCore:
     type: framework
-    platform: iOS
+    platform: [iOS, watchOS]
     sources: ["."]
     dependencies:
       - package: CocoaLumberjack

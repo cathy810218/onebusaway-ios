@@ -7,6 +7,8 @@
 
 import UIKit
 
+#if !os(watchOS)
+
 public class PaddingLabel: UILabel {
     // MARK: - Properties
     public var insets: UIEdgeInsets
@@ -67,3 +69,5 @@ public class PaddingLabel: UILabel {
         }
     }
 }
+
+#endif

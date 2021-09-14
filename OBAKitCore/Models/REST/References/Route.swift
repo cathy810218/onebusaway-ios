@@ -17,12 +17,15 @@ public class Route: NSObject, Identifiable, Codable, HasReferences {
     let agencyID: String
     public var agency: Agency!
 
+    #if !os(watchOS)
     public let color: UIColor?
+    public let textColor: UIColor?
+    #endif
+
     public let routeDescription: String?
     public let id: RouteID
     public let longName: String?
     public let shortName: String
-    public let textColor: UIColor?
     public let routeType: RouteType
     public let routeURL: URL?
 
@@ -54,16 +57,17 @@ public class Route: NSObject, Identifiable, Codable, HasReferences {
         // via `HasReferences.loadReferences()`.
         agency = try container.decodeIfPresent(Agency.self, forKey: .agency)
         regionIdentifier = try container.decodeIfPresent(Int.self, forKey: .regionIdentifier)
-
-        color = UIColor(hex: String.nilifyBlankValue(try container.decodeIfPresent(String.self, forKey: .color)))
-
         routeDescription = String.nilifyBlankValue(try container.decodeIfPresent(String.self, forKey: .routeDescription))
         id = try container.decode(RouteID.self, forKey: .id)
         longName = String.nilifyBlankValue(try container.decodeIfPresent(String.self, forKey: .longName))
         shortName = try container.decode(String.self, forKey: .shortName)
-        textColor = UIColor(hex: String.nilifyBlankValue(try container.decodeIfPresent(String.self, forKey: .textColor)))
         routeType = try container.decode(RouteType.self, forKey: .routeType)
         routeURL = try? container.decodeGarbageURL(forKey: .routeURL)
+
+        #if !os(watchOS)
+        color = UIColor(hex: String.nilifyBlankValue(try container.decodeIfPresent(String.self, forKey: .color)))
+        textColor = UIColor(hex: String.nilifyBlankValue(try container.decodeIfPresent(String.self, forKey: .textColor)))
+        #endif
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -71,14 +75,17 @@ public class Route: NSObject, Identifiable, Codable, HasReferences {
         try container.encode(agencyID, forKey: .agencyID)
         try container.encode(agency, forKey: .agency)
         try container.encodeIfPresent(regionIdentifier, forKey: .regionIdentifier)
-        try container.encodeIfPresent(color?.toHex, forKey: .color)
         try container.encodeIfPresent(routeDescription, forKey: .routeDescription)
         try container.encode(id, forKey: .id)
         try container.encodeIfPresent(longName, forKey: .longName)
         try container.encode(shortName, forKey: .shortName)
-        try container.encodeIfPresent(textColor?.toHex, forKey: .textColor)
         try container.encode(routeType, forKey: .routeType)
         try container.encodeIfPresent(routeURL?.absoluteString, forKey: .routeURL)
+
+        #if !os(watchOS)
+        try container.encodeIfPresent(color?.toHex, forKey: .color)
+        try container.encodeIfPresent(textColor?.toHex, forKey: .textColor)
+        #endif
     }
 
     // MARK: - HasReferences
@@ -105,15 +112,20 @@ public class Route: NSObject, Identifiable, Codable, HasReferences {
             return false
         }
 
+        #if os(watchOS)
+        let colorEqual = true
+        #else
+        let colorEqual = color == rhs.color && textColor == rhs.textColor
+        #endif
+
         return
+            colorEqual &&
             agencyID == rhs.agencyID &&
-            color == rhs.color &&
             regionIdentifier == rhs.regionIdentifier &&
             routeDescription == rhs.routeDescription &&
             id == rhs.id &&
             longName == rhs.longName &&
             shortName == rhs.shortName &&
-            textColor == rhs.textColor &&
             routeType == rhs.routeType &&
             routeURL == rhs.routeURL
     }
@@ -121,15 +133,19 @@ public class Route: NSObject, Identifiable, Codable, HasReferences {
     public override var hash: Int {
         var hasher = Hasher()
         hasher.combine(agencyID)
-        hasher.combine(color)
         hasher.combine(regionIdentifier)
         hasher.combine(routeDescription)
         hasher.combine(id)
         hasher.combine(longName)
         hasher.combine(shortName)
-        hasher.combine(textColor)
         hasher.combine(routeType)
         hasher.combine(routeURL)
+
+        #if !os(watchOS)
+        hasher.combine(color)
+        hasher.combine(textColor)
+        #endif
+
         return hasher.finalize()
     }
 

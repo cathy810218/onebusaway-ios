@@ -10,6 +10,8 @@ OBAKit/Info.plist
 OBAKitCore/Info.plist
 OBAKitTests/Info.plist
 TodayView/Info.plist
+watchOSApp/Info.plist
+watchOSExtension/Info.plist
 /project.yml
 
 ## SwiftPM

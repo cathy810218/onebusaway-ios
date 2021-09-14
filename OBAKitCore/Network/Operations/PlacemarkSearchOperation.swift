@@ -10,6 +10,8 @@
 import Foundation
 import MapKit
 
+#if !os(watchOS)
+
 /// The operation for performing a placemark-search operation.
 public class PlacemarkSearchOperation: AsyncOperation {
 
@@ -49,3 +51,5 @@ public class PlacemarkSearchOperation: AsyncOperation {
         finish()
     }
 }
+
+#endif

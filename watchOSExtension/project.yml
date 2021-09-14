@@ -1,0 +1,16 @@
+targets:
+  watchOSExtension:
+    type: watchkit2-extension
+    platform: watchOS
+    sources: ["."]
+    dependencies:
+      - target: OBAKitCore_watchOS
+    info:
+      path: "Info.plist"
+      properties:
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
+        CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
+        CLKComplicationPrincipalClass: "$(PRODUCT_MODULE_NAME).ComplicationController"
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.watchkit

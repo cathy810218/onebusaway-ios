@@ -8,6 +8,8 @@
 
 import UIKit
 
+#if !os(watchOS)
+
 /// A rounded time badge representing the provided upcoming departure time and deviation status.
 public class DepartureTimeBadge: UILabel, ArrivalDepartureDrivenUI {
     public struct Configuration: Hashable, Equatable {
@@ -22,7 +24,7 @@ public class DepartureTimeBadge: UILabel, ArrivalDepartureDrivenUI {
                     formatters: Formatters) {
             self.accessibilityLabel = formatters.explanationForArrivalDeparture(tempuraState: temporalState, arrivalDepartureStatus: arrivalDepartureStatus, arrivalDepartureMinutes: arrivalDepartureMinutes)
             self.displayText = formatters.shortFormattedTime(untilMinutes: arrivalDepartureMinutes, temporalState: temporalState)
-            self.backgroundColor = formatters.backgroundColorForScheduleStatus(scheduleStatus).cgColor
+            self.backgroundColor = ColorFormatters.backgroundUIColorForScheduleStatus(scheduleStatus).cgColor
         }
 
         public init(withArrivalDeparture arrivalDeparture: ArrivalDeparture, formatters: Formatters) {
@@ -106,7 +108,9 @@ public class DepartureTimeBadge: UILabel, ArrivalDepartureDrivenUI {
     }
 }
 
-#if DEBUG
+#endif
+
+#if !os(watchOS) && DEBUG
 import SwiftUI
 
 struct DepartureTimeBadge_Previews: PreviewProvider {

@@ -114,7 +114,10 @@ public class DecodableOperation<T>: NetworkOperation where T: Decodable {
             return true
         }
 
-        if error.domain == (kCFErrorDomainCFNetwork as String) && error.code == NSURLErrorAppTransportSecurityRequiresSecureConnection {
+        // we're using the string "kCFErrorDomainCFNetwork" instead of the constant because
+        // watchOS doesn't publicly expose CFNetwork and I don't want to find another way
+        // of detecting captive portals :(
+        if error.domain == "kCFErrorDomainCFNetwork" && error.code == NSURLErrorAppTransportSecurityRequiresSecureConnection {
             return true
         }
 

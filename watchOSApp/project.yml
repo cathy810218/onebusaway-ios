@@ -1,0 +1,17 @@
+targets:
+  watchOSApp:
+    type: application.watchapp2
+    platform: watchOS
+    sources: ["."]
+    dependencies:
+      - target: watchOSExtension
+    info:
+      path: "Info.plist"
+      properties:
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
+        CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+        WKWatchKitApp: true

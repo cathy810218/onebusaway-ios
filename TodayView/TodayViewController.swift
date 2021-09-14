@@ -18,8 +18,7 @@ class TodayViewController: UIViewController, BookmarkDataDelegate, NCWidgetProvi
     // MARK: - App Context
     private let formatters = Formatters(
         locale: Locale.autoupdatingCurrent,
-        calendar: Calendar.autoupdatingCurrent,
-        themeColors: ThemeColors.shared)
+        calendar: Calendar.autoupdatingCurrent)
 
     private let userDefaults = UserDefaults(suiteName: Bundle.main.appGroup!)!
     private lazy var locationManager = CLLocationManager()

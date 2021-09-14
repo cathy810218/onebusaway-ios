@@ -34,6 +34,8 @@ public class ThemeMetrics: NSObject {
     public static let collectionViewLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: padding, bottom: 0, trailing: padding)
 }
 
+#if !os(watchOS)
+
 public class ThemeColors: NSObject {
 
     /// Primary theme color/brand color.
@@ -59,30 +61,6 @@ public class ThemeColors: NSObject {
 
     /// The fill color for a directional arrow on a map annotation.
     public let stopArrowFillColor: UIColor
-
-    /// The color used to represent early departures.
-    public let departureEarly: UIColor
-
-    /// The background color used to represent early departures on smaller user interfaces like a Today View extension.
-    public let departureEarlyBackground: UIColor
-
-    /// The color used to represent late departures.
-    public let departureLate: UIColor
-
-    /// The background color used to represent late departures on smaller user interfaces like a Today View extension.
-    public let departureLateBackground: UIColor
-
-    /// The color used to represent on-time departures.
-    public let departureOnTime: UIColor
-
-    /// The background color used to represent on time departures on smaller user interfaces like a Today View extension.
-    public let departureOnTimeBackground: UIColor
-
-    /// The color used to represent departures with an unknown status. (i.e. We don't know if they are early/late/on-time.)
-    public let departureUnknown: UIColor
-
-    /// The background color used to represent unknown departures on smaller user interfaces like a Today View extension.
-    public let departureUnknownBackground: UIColor
 
     /// The color used to highlight changing properties in the UI.
     public let propertyChanged: UIColor
@@ -171,3 +149,5 @@ public class ThemeColors: NSObject {
         errorColor = .systemRed
     }
 }
+
+#endif

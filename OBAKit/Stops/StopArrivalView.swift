@@ -283,7 +283,7 @@ class StopArrivalView: UIView {
         fullExplanationLabel.attributedText = formatters.fullAttributedExplanation(from: arrivalDeparture)
 
         minutesLabel.text = formatters.shortFormattedTime(until: arrivalDeparture)
-        minutesLabel.textColor = formatters.colorForScheduleStatus(arrivalDeparture.scheduleStatus)
+        minutesLabel.textColor = ColorFormatters.uiColorForScheduleStatus(arrivalDeparture.scheduleStatus)
 
         accessibilityTimeLabel.text = formatters.timeFormatter.string(from: arrivalDeparture.arrivalDepartureDate)
 
@@ -294,7 +294,7 @@ class StopArrivalView: UIView {
             accessibilityScheduleDeviationLabel.text = formatters.formattedScheduleDeviation(for: arrivalDeparture)
         }
 
-        accessibilityScheduleDeviationLabel.textColor = formatters.colorForScheduleStatus(arrivalDeparture.scheduleStatus)
+        accessibilityScheduleDeviationLabel.textColor = ColorFormatters.uiColorForScheduleStatus(arrivalDeparture.scheduleStatus)
         accessibilityRelativeTimeBadge.configure(with: arrivalDeparture, formatters: formatters)
 
         accessibilityLabel = formatters.accessibilityLabel(for: arrivalDeparture)

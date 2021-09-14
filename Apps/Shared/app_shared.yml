@@ -16,6 +16,7 @@ options:
   groupSortPosition: top
   deploymentTarget:
     iOS: "14.5"
+    watchOS: "7.4"
 
 ############
 # App
@@ -26,7 +27,7 @@ targets:
     type: application
     platform: iOS
     dependencies:
-      - target: OBAKitCore
+      - target: OBAKitCore_iOS
       - target: OBAKit
       - target: TodayView
     info:
@@ -71,11 +72,6 @@ targets:
     settings:
       base:
         OTHER_LDFLAGS: -ObjC
-  TodayView:
-    info:
-      properties:
-        CFBundleShortVersionString: "$(MARKETING_VERSION)"
-
 
 packages:
     BLTNBoard:

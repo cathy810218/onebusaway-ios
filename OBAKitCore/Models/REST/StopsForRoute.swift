@@ -27,7 +27,10 @@ public class StopsForRoute: NSObject, Identifiable, Decodable, HasReferences {
     let routeID: String
     public private(set) var route: Route!
 
+    #if !os(watchOS)
+
     public let rawPolylines: [String]
+
     public lazy var polylines: [MKPolyline] = rawPolylines.compactMap { Polyline(encodedPolyline: $0).mkPolyline }
 
     public lazy var mapRect: MKMapRect = {
@@ -37,6 +40,7 @@ public class StopsForRoute: NSObject, Identifiable, Decodable, HasReferences {
         }
         return bounds
     }()
+    #endif
 
     let stopIDs: [String]
     public private(set) var stops: [Stop]!
@@ -55,8 +59,11 @@ public class StopsForRoute: NSObject, Identifiable, Decodable, HasReferences {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        routeID = try container.decode(String.self, forKey: .routeID)
+        #if !os(watchOS)
         rawPolylines = try container.decode([PolylineEntity].self, forKey: .rawPolylines).compactMap { $0.points }
+        #endif
+
+        routeID = try container.decode(String.self, forKey: .routeID)
         stopIDs = try container.decode([String].self, forKey: .stopIDs)
         stopGroupings = try container.decode([StopGrouping].self, forKey: .stopGroupings)
     }
@@ -106,7 +113,10 @@ public class StopsForRoute: NSObject, Identifiable, Decodable, HasReferences {
         public let id: String
         public let name: String
         public let groupingType: String
+
+        #if !os(watchOS)
         public let polylines: [String]
+        #endif
 
         let stopIDs: [String]
         public private(set) var stops = [Stop]()
@@ -130,8 +140,10 @@ public class StopsForRoute: NSObject, Identifiable, Decodable, HasReferences {
             name = try nameContainer.decode(String.self, forKey: .name)
             groupingType = try nameContainer.decode(String.self, forKey: .groupingType)
 
+            #if !os(watchOS)
             let polylineEntities = try container.decode([PolylineEntity].self, forKey: .polylines)
             polylines = polylineEntities.compactMap { $0.points }
+            #endif
 
             stopIDs = try container.decode([String].self, forKey: .stopIDs)
         }

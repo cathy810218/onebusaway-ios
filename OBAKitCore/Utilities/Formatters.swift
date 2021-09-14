@@ -12,7 +12,6 @@ import MapKit
 
 public class Formatters: NSObject {
     private let locale: Locale
-    private let themeColors: ThemeColors
     private let calendar: Calendar
 
     /// Creates a new `Formatters` object that will use the provided `Calendar` and `Locale` for locale-specific customization.
@@ -20,10 +19,9 @@ public class Formatters: NSObject {
     /// - Note: You probably should pass in the `autoupdatingCurrent` instances of `Locale` and `Calendar` to this method.
     ///
     /// - Parameter locale: The current locale of the user's device.
-    public init(locale: Locale, calendar: Calendar, themeColors: ThemeColors) {
+    public init(locale: Locale, calendar: Calendar) {
         self.locale = locale
         self.calendar = calendar
-        self.themeColors = themeColors
     }
 
     // MARK: - Distance Formatting
@@ -107,6 +105,9 @@ public class Formatters: NSObject {
     }()
 
     // MARK: - ArrivalDeparture
+
+    #if !os(watchOS)
+
     // MARK: Full attributed explanation
     public func fullAttributedExplanation(from arrivalDeparture: ArrivalDeparture) -> NSAttributedString {
         return fullAttributedArrivalDepartureExplanation(
@@ -134,7 +135,7 @@ public class Formatters: NSObject {
             explanationText = formattedScheduleDeviation(temporalState: temporalState, arrivalDepartureStatus: arrivalDepartureStatus, scheduleDeviation: scheduleDeviationInMinutes)
         }
 
-        let scheduleStatusColor = colorForScheduleStatus(scheduleStatus)
+        let scheduleStatusColor = ColorFormatters.uiColorForScheduleStatus(scheduleStatus)
         let timeExplanationFont = UIFont.preferredFont(forTextStyle: .footnote)
 
         let attributedExplanation = NSMutableAttributedString(
@@ -150,6 +151,8 @@ public class Formatters: NSObject {
 
         return attributedExplanation
     }
+
+    #endif
 
     // MARK: Accessibility label
     /// Creates a localized string appropriate for using in UIAccessibility.accessibilityLabel. Example: "Route 49 - University District Broadway"
@@ -435,30 +438,6 @@ public class Formatters: NSObject {
         default:
             let formatString = OBALoc("formatters.time_fmt", value: "%d minutes", comment: "Formatted time text for arrivals/departures. Used for accessibility labels, so be sure to spell out the word for 'minute'. Example: 7 minutes means that this event happens 7 minutes in the future. -7 minutes means 7 minutes in the past.")
             return String(format: formatString, arrivalDepartureMinutes)
-        }
-    }
-
-    /// Retrieves the appropriate background color for the passed-in `ScheduleStatus` value.
-    /// - Parameter status: The schedule status to map to a color.
-    /// - Returns: The background color corresponding to the passed-in status.
-    public func backgroundColorForScheduleStatus(_ status: ScheduleStatus) -> UIColor {
-        switch status {
-        case .onTime: return themeColors.departureOnTimeBackground
-        case .early: return themeColors.departureEarlyBackground
-        case .delayed: return themeColors.departureLateBackground
-        default: return themeColors.departureUnknownBackground
-        }
-    }
-
-    /// Retrieves the appropriate color for the passed-in `ScheduleStatus` value.
-    /// - Parameter status: The schedule status to map to a color.
-    /// - Returns: The color corresponding to the passed-in status.
-    public func colorForScheduleStatus(_ status: ScheduleStatus) -> UIColor {
-        switch status {
-        case .onTime: return themeColors.departureOnTime
-        case .early: return themeColors.departureEarly
-        case .delayed: return themeColors.departureLate
-        default: return themeColors.departureUnknown
         }
     }
 
